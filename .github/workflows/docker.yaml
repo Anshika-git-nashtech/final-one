@@ -39,8 +39,16 @@ jobs:
         run: |
           curl -s https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo bash
 
+      - name: Verify Trivy installation
+        run: |
+          trivy --version    
+
       - name: Build Docker image
         run: docker build -f application/dockerfile -t my-app .
+
+      - name: List Docker images
+        run: |
+          docker images  
 
       - name: Scan Docker Image with Trivy
         run: |
