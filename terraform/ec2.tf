@@ -8,13 +8,12 @@ terraform {
 }
 
 provider "aws" {
-    region = "us-east-1"
-    access_key=""
-    secret_key="" 
+    region = "ap-south-1"
+    
 }
 
 resource "aws_instance" "web_server" {
-  ami           = "ami-0c55b159cbfafe1f0"  
+  ami           = "ami-00bb6a80f01f03502"  
   instance_type = "t2.micro"
   key_name      = "my-key-pair"  
   subnet_id     = aws_subnet.main.id
