@@ -38,7 +38,8 @@ jobs:
       - name: Download and install Trivy
         run: |
           curl -s https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo bash
-          trivy --version   
+          sudo mv ./bin/trivy /usr/local/bin/trivy  
+          trivy --version  
 
       - name: Build Docker image
         run: docker build -f application/dockerfile -t my-app .
