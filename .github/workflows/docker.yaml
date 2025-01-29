@@ -37,20 +37,22 @@ jobs:
 
       - name: Download and install Trivy
         run: |
-          curl -sSL https://github.com/aquasecurity/trivy/releases/download/v0.30.0/trivy_0.30.0_Linux-x86_64.tar.gz -o trivy.tar.gz
-          tar xzvf trivy.tar.gz
-          sudo mv trivy /usr/local/bin/   
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.39.2/trivy_0.39.2_Linux-x86_64.deb
+          sudo dpkg -i trivy_0.39.2_Linux-x86_64.deb 
 
       - name: Build Docker image
         run: docker build -f application/dockerfile -t my-app .
 
       - name: Scan Docker Image with Trivy
         run: |
-              trivy image ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+          trivy image --exit-code 1 --severity CRITICAL,HIGH my-app
+
 
       - name: Push Docker image
         run: | 
-              docker tag my-app ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
-              docker push ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
+          docker tag my-app ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
  
  
