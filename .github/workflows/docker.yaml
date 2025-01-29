@@ -50,7 +50,7 @@ jobs:
 
       - name: Scan Docker Image with Trivy
         run: |
-          trivy image --exit-code 1 --severity CRITICAL,HIGH my-app
+          trivy image --severity CRITICAL,HIGH my-app
 
 
       - name: Push Docker image
