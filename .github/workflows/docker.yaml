@@ -55,9 +55,9 @@ jobs:
 
       - name: Push Docker image
         run: | 
-          docker tag my-app ${{ secrets.DOCKER_USERNAME }}/my-web-app:latest
-          
-      - name: Push Docker image
-        run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-web-app:latest
+          docker tag my-app ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
+
+
+     
  
